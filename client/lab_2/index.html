@@ -7,12 +7,14 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div>
-    <header><h1>Malik's Labs For INST377</h1></header>
-    </div>
-      <div>
+  <div class="wrapper">
+    <!--Wrapper-->
+    <header class="header"><h1>Malik's Labs For INST377</h1></header>
+      <div class="container">
+        <!--Container-->
+        <div class="left_section box">
         <h3>Album Names</h3>
-        <ol>
+        <ol class="box">
           <li>Maria Isabel- Stuck in the Sky</li>
           <li>D'Angelo- Black Messiah</li>
           <li>Cleo Sol- Rose in The Dark</li>
@@ -20,27 +22,16 @@
           <li>Jessie Ware- What's Your Pleasure</li>
         </ol>
       </div>
-        <div>
+        <div class="right_section box">
           <h3>Image Carousel</h3>
-          <img src='images\mochi.jpg' width='150'/>
-          <img src='images/mochi.gif' width='150'/>
-          <img src='images/mochi.png' width="150"/>
-          <img src='images/mochi.svg' width="75"/>
+          <img id="slide_1" src='images/mochi.jpg'  alt="The first image is a JPEG of a smiling mochi ball inside of a bubble."/>
+          <img id="slide_2" src='images/mochi.gif' alt="The second is a GIF of the mochi ball bouncing." />
+          <img id="slide_3" src='images/mochi.png' alt="The third is a png icon of a smiling mochi ball." />
+          <img id="slide_4" src='images/mochi.svg' alt="The final image is a svg of the smiling mochi ball with size adjustment bars on each side.
+        /div>"/>
+        <!-- description box-->
+        The first image is a JPEG of a smiling mochi ball inside of a bubble. The second is a GIF of the mochi ball bouncing. The third is a png icon of a smiling mochi ball. The final image is a svg of the smiling mochi ball with size adjustment bars on each side.
           </div>
-            <div>
-              <p>The first image is a JPEG of a smiling mochi ball inside of a bubble. The second is a GIF of the mochi ball bouncing. The third is a png icon of a smiling mochi ball. The final image is a svg of the smiling mochi ball with size adjustment bars on each side.</p>
-              </div>
- <footer><a href="http://github.com/UMD-INST377/" target="_blank" rel="noopener noreferrer">Kenshiro35</a></footer>
+ <footer class="footer"><a href="http://github.com/UMD-INST377/" target="_blank" rel="noopener noreferrer">Kenshiro35</a></footer>
 </body>
 </html>
-
-Replace this with your complete HTML from Lab 1
-
-Hook it up to CSS by including style.css in the <head> tag
-
-Then add CSS class names to your HTML to make it look like the lab pictures.
-For example: <div class="selector">
-
-You should not need to edit the CSS to do this, only the HTML.
-
-Don't forget to add an actual set of image descriptions to your image carousel.
