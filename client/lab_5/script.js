@@ -2,10 +2,15 @@
   Hook this script to index.html
   by adding `<script src="script.js">` just before your closing `</body>` tag
 */
+function filterList(list, query){}
 
 async function mainEvent() { // the async keyword means we can make API requests
   const form = document.querySelector('.main_form'); // This class name needs to be set on your form before you can listen for an event on it
-  form.addEventListener('submit', async (submitEvent) => { // async has to be declared on every function that needs to "await" something
+  const filterButton = document.querySelector('.filter_button');
+
+  let currentList = [];
+
+  mainForm.addEventListener('submit', async (submitEvent) => { // async has to be declared on every function that needs to "await" something
     submitEvent.preventDefault(); // This prevents your page from going to http://localhost:3000/api even if your form still has an action set on it
     console.log('form submission'); // this is substituting for a "breakpoint"
 
@@ -35,7 +40,8 @@ async function mainEvent() { // the async keyword means we can make API requests
       // It does not include any of your form values, though
     */
 
-    const results = await fetch('https://data.princegeorgescountymd.gov/resource/umjn-t2iz.json');
+    const results = await fetch('https://data.princegeorgescountymd.gov/resource/umjn-t2iz.json')
+    console.log(results);
     /*
    ## Get request with query parameters
 
@@ -51,6 +57,10 @@ async function mainEvent() { // the async keyword means we can make API requests
     */
 
     // This changes the response from the GET into data we can use - an "object"
+    currentList = await results.json();
+
+    console.table(currentList);
+
     const arrayFromJson = await results.json();
     console.table(arrayFromJson.data); // this is called "dot notation"
     // arrayFromJson.data - we're accessing a key called 'data' on the returned object
