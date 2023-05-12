@@ -2,7 +2,14 @@
   Hook this script to index.html
   by adding `<script src="script.js">` just before your closing `</body>` tag
 */
-function filterList(list, query){}
+function filterList(list, query){
+  return list.filter((item) => {
+    const lowerCaseName = item.name.toLowerCase();
+    const lowerCaseQuery = query.toLowerCase();
+    return lowerCaseName.includes(lowerCaseQuery);
+
+  }
+,}
 
 async function mainEvent() { // the async keyword means we can make API requests
   const form = document.querySelector('.main_form'); // This class name needs to be set on your form before you can listen for an event on it
@@ -21,6 +28,8 @@ async function mainEvent() { // the async keyword means we can make API requests
 
         Let's get those form results before sending off our GET request using the Fetch API
     */
+    const results = await fetch('https://data.princegeorgescountymd.gov/resource/umjn-t2iz.json')
+    currentList = await results.json()
 
     // this is the preferred way to handle form data in JS in 2022
     const formData = new FormData(submitEvent.target); // get the data from the listener target
@@ -39,9 +48,6 @@ async function mainEvent() { // the async keyword means we can make API requests
       // this is a basic GET request
       // It does not include any of your form values, though
     */
-
-    const results = await fetch('https://data.princegeorgescountymd.gov/resource/umjn-t2iz.json')
-    console.log(results);
     /*
    ## Get request with query parameters
 
@@ -67,7 +73,17 @@ async function mainEvent() { // the async keyword means we can make API requests
     // it initially contains all 1,000 records from your request
   });
 }
+  filterButton.addEventListener('click', (event) => {
+    console.log('clicked FilterButton');
 
+    const formData = new FormData(mainForm);
+    const formProps = Object.fromEntries(formData)
+
+    console.log(formProps);
+    const newList = filterList(currentList, formProps.resto);
+
+    console.log(newList);
+  }
 /*
   This adds an event listener that fires our main event only once our page elements have loaded
   The use of the async keyword means we can "await" events before continuing in our scripts
