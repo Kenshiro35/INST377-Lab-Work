@@ -89,4 +89,4 @@ async function mainEvent() { // the async keyword means we can make API requests
   The use of the async keyword means we can "await" events before continuing in our scripts
   In this case, we load some data when the form has submitted
 */
-document.addEventListener('DOMContentLoaded', async () => mainEvent()); // the async keyword means we can make API requests
+document.addEventListener('DOMContentLoaded', async () => mainEvent())); // the async keyword means we can make API requests
