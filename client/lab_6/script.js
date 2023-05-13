@@ -4,12 +4,48 @@
   Hook this script to index.html
   by adding `<script src="script.js">` just before your closing `</body>` tag
 */
+function getRandomInt(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min) + min); // The maximum is exclusive and the minimum is inclusive
+}
 
+function injectHTML(list) {
+  console.log('fired injectHTML')
+  const target = document.querySelector('#restaurant_list');
+  target.innerHTML = '';
+  list.forEach((item) => {
+    const str = `<li>${item.name}</li>`;
+    target.innerHTML += str
+  })
+}
+
+function filterList(list, query){
+  return list.filter((item) => {
+    const lowerCaseName = item.name.toLowerCase();
+    const lowerCaseQuery = query.toLowerCase();
+    return lowerCaseName.includes(lowerCaseQuery);
+
+  });
+}
+
+async function mainEvent() { // the async keyword means we can make API requests
+  const mainForm = document.querySelector('.main_form'); // This class name needs to be set on your form before you can listen for an event on it
+  const filterDataButton = document.querySelector('#filter');
+  const loadDataButton = document.querySelector('#load_data');
+  const generateListButton = document.querySelector('#generate');
+  let currentList = [];
+
+  loadDataButton.addEventListener('clickt', async (submitEvent) => { // async has to be declared on every function that needs to "await" something
+    submitEvent.preventDefault(); // This prevents your page from going to http://localhost:3000/api even if your form still has an action set on it
+    console.log('form submission'); // this is substituting for a "breakpoint"
 /*
   ## Utility Functions
     Under this comment place any utility functions you need - like an inclusive random number selector
     https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
 */
+const results = await fetch('https://data.princegeorgescountymd.gov/resource/umjn-t2iz.json')
+    currentList = await results.json();
 
 function injectHTML(list) {
   console.log('fired injectHTML');
@@ -70,9 +106,16 @@ async function mainEvent() {
     This next line goes to the request for 'GET' in the file at /server/routes/foodServiceRoutes.js
     It's at about line 27 - go have a look and see what we're retrieving and sending back.
    */
-  const results = await fetch('/api/foodServicesPG');
+  const results = await fetch('https://data.princegeorgescountymd.gov/resource/umjn-t2iz.json');
   const arrayFromJson = await results.json(); // here is where we get the data from our request as JSON
 
+  currentList = await results.json();
+
+    console.table(currentList);
+    injectHTML(currentList);
+
+    const arrayFromJson = await results.json();
+    console.table(arrayFromJson.data);
   /*
     Below this comment, we log out a table of all the results using "dot notation"
     An alternate notation would be "bracket notation" - arrayFromJson["data"]

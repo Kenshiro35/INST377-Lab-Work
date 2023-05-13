@@ -2,6 +2,22 @@
   Hook this script to index.html
   by adding `<script src="script.js">` just before your closing `</body>` tag
 */
+function getRandomInt(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min) + min); // The maximum is exclusive and the minimum is inclusive
+}
+
+function injectHTML(list) {
+  console.log('fired injectHTML')
+  const target = document.querySelector('#restaurant_list');
+  target.innerHTML = '';
+  list.forEach((item) => {
+    const str = `<li>${item.name}</li>`;
+    target.innerHTML += str
+  })
+}
+
 function filterList(list, query){
   return list.filter((item) => {
     const lowerCaseName = item.name.toLowerCase();
@@ -66,6 +82,7 @@ async function mainEvent() { // the async keyword means we can make API requests
     currentList = await results.json();
 
     console.table(currentList);
+    injectHTML(currentList);
 
     const arrayFromJson = await results.json();
     console.table(arrayFromJson.data); // this is called "dot notation"
